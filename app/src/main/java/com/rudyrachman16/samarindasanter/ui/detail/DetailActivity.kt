@@ -12,7 +12,6 @@ import com.rudyrachman16.samarindasanter.R
 import com.rudyrachman16.samarindasanter.core.model.News
 import com.rudyrachman16.samarindasanter.databinding.ActivityDetailBinding
 import com.rudyrachman16.samarindasanter.utils.ImageViewUtils.load
-import com.rudyrachman16.samarindasanter.utils.ViewUtils.fromHTML
 
 class DetailActivity : AppCompatActivity() {
     companion object {

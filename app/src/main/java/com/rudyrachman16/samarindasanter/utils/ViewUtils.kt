@@ -13,7 +13,8 @@ object ViewUtils {
     fun Activity.showLoadingDialog(isLoading: Boolean) {
         if (isLoading) {
             if (loadingDialog == null || loadingDialog?.isShowing != true) {
-                loadingDialog = AlertDialog.Builder(this).setView(DialogLoadingBinding.inflate(layoutInflater).root).apply {
+                loadingDialog = AlertDialog.Builder(this)
+                    .setView(DialogLoadingBinding.inflate(layoutInflater).root).apply {
                     setCancelable(false)
                 }.create()
                 loadingDialog?.show()

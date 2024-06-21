@@ -1,8 +1,6 @@
 package com.rudyrachman16.samarindasanter.ui.dashboard
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -33,13 +31,14 @@ class DashboardActivity : AppCompatActivity() {
         }
 
         viewModel.news.observe(this) {
-            when(it) {
+            when (it) {
                 Status.Loading -> showLoadingDialog(true)
                 is Status.Error -> {
                     showLoadingDialog(false)
                     showToast(it.error.message ?: "Terjadi error")
                     emptyPlaceholder(true, it.error.message ?: "")
                 }
+
                 is Status.Success -> {
                     showLoadingDialog(false)
                     emptyPlaceholder(it.data.isEmpty())
@@ -58,7 +57,10 @@ class DashboardActivity : AppCompatActivity() {
         }
     }
 
-    private fun emptyPlaceholder(isEmpty: Boolean, message: String = getString(R.string.data_kosong)) {
+    private fun emptyPlaceholder(
+        isEmpty: Boolean,
+        message: String = getString(R.string.data_kosong)
+    ) {
         bind.rvBerita.isVisible = !isEmpty
         bind.tvInfo.isVisible = isEmpty
         bind.tvInfo.text = message
