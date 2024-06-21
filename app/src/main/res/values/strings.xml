@@ -4,4 +4,7 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="tunggu_sebentar">Tunggu Sebentar</string>
+    <string name="gambar_berita">Gambar Berita</string>
+    <string name="data_kosong">Data kosong</string>
 </resources>

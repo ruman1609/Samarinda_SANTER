@@ -12,5 +12,5 @@ interface UserDao {
     suspend fun registration(user: User)
 
     @Query("SELECT * FROM user WHERE username == :username AND password == :password")
-    suspend fun login(username: String, password: String): User
+    suspend fun login(username: String, password: String): List<User>
 }
