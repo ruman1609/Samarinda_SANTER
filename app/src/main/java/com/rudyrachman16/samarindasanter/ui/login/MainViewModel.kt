@@ -3,8 +3,11 @@ package com.rudyrachman16.samarindasanter.ui.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.rudyrachman16.samarindasanter.core.Repository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MainViewModel(private val repository: Repository) : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
     fun login(username: String, password: String) =
         repository.login(username, password).asLiveData()
 

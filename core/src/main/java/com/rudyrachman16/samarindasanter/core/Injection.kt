@@ -4,39 +4,48 @@ import android.content.Context
 import androidx.room.Room
 import com.rudyrachman16.samarindasanter.core.api.ApiService
 import com.rudyrachman16.samarindasanter.core.db.SanterDatabase
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
+@Module
+@InstallIn(SingletonComponent::class)
 object Injection {
 
-    private val loggingInterceptor =
+    @Singleton
+    @Provides
+    fun loggingInterceptor() =
         if (BuildConfig.DEBUG) HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
         else HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
-    private val client = OkHttpClient.Builder().apply {
+
+    @Singleton
+    @Provides
+    fun client(loggingInterceptor: HttpLoggingInterceptor) = OkHttpClient.Builder().apply {
         addInterceptor(loggingInterceptor)
         callTimeout(16, TimeUnit.SECONDS)
         readTimeout(16, TimeUnit.SECONDS)
         connectTimeout(16, TimeUnit.SECONDS)
     }.build()
 
-    private val apiService: ApiService by lazy {
-        Retrofit.Builder().apply {
-            addConverterFactory(GsonConverterFactory.create())
-            baseUrl(BuildConfig.BASE_URL)
-            client(client)
-        }.build().create(ApiService::class.java)
-    }
+    @Singleton
+    @Provides
+    fun provideApiService(client: OkHttpClient): ApiService = Retrofit.Builder().apply {
+        addConverterFactory(GsonConverterFactory.create())
+        baseUrl(BuildConfig.BASE_URL)
+        client(client)
+    }.build().create(ApiService::class.java)
 
-    private var database: SanterDatabase? = null
-    private fun getDatabase(context: Context) = database ?: synchronized(this) {
-        database ?: Room.databaseBuilder(context, SanterDatabase::class.java, "SanterDatabase")
-            .fallbackToDestructiveMigration().build().apply { database = this }
-    }
-
-    fun injectRepository(context: Context) = Repository.getInstance(
-        apiService, getDatabase(context)
-    )
+    @Singleton
+    @Provides
+    fun provideDatabase(@ApplicationContext context: Context) =
+        Room.databaseBuilder(context, SanterDatabase::class.java, "SanterDatabase")
+            .fallbackToDestructiveMigration().build()
 }

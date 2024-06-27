@@ -8,13 +8,14 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import com.rudyrachman16.samarindasanter.R
-import com.rudyrachman16.samarindasanter.ViewModelFactory
 import com.rudyrachman16.samarindasanter.core.Status
 import com.rudyrachman16.samarindasanter.databinding.ActivityMainBinding
 import com.rudyrachman16.samarindasanter.ui.dashboard.DashboardActivity
 import com.rudyrachman16.samarindasanter.utils.ViewUtils.showLoadingDialog
 import com.rudyrachman16.samarindasanter.utils.ViewUtils.showToast
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private var isLogin = true
         set(value) {
@@ -24,9 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var bind: ActivityMainBinding
 
-    private val viewModel: MainViewModel by viewModels {
-        ViewModelFactory.getInstance(applicationContext)
-    }
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

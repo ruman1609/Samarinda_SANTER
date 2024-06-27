@@ -7,18 +7,17 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import com.rudyrachman16.samarindasanter.R
-import com.rudyrachman16.samarindasanter.ViewModelFactory
 import com.rudyrachman16.samarindasanter.core.Status
 import com.rudyrachman16.samarindasanter.databinding.ActivityDashboardBinding
 import com.rudyrachman16.samarindasanter.ui.detail.DetailActivity
 import com.rudyrachman16.samarindasanter.utils.ViewUtils.showLoadingDialog
 import com.rudyrachman16.samarindasanter.utils.ViewUtils.showToast
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DashboardActivity : AppCompatActivity() {
     private lateinit var bind: ActivityDashboardBinding
-    private val viewModel: DashboardViewModel by viewModels {
-        ViewModelFactory.getInstance(applicationContext)
-    }
+    private val viewModel: DashboardViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

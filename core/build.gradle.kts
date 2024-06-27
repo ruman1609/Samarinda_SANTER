@@ -4,7 +4,8 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("com.google.devtools.ksp")
+    alias(libs.plugins.devtools.ksp)
+    alias(libs.plugins.hilt.dagger)
     id("kotlin-parcelize")
 }
 
@@ -73,6 +74,9 @@ dependencies {
     implementation(libs.retrofit) // Retrofit
     implementation(libs.converter.gson)  // Retrofit GSON Converter
     implementation(libs.logging.interceptor)  // buat Log Retrofit
+
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

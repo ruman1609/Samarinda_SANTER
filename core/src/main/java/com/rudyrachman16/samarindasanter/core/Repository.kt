@@ -7,23 +7,14 @@ import com.rudyrachman16.samarindasanter.core.db.SanterDatabase
 import com.rudyrachman16.samarindasanter.core.model.News
 import com.rudyrachman16.samarindasanter.core.model.User
 import com.rudyrachman16.samarindasanter.core.utils.FlowUtils
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class Repository private constructor(
+@Singleton
+class Repository @Inject constructor(
     private val apiService: ApiService,
     private val dbService: SanterDatabase
 ) {
-
-    companion object {
-        @Volatile
-        private var INSTANCE: Repository? = null
-
-        @JvmStatic
-        fun getInstance(apiService: ApiService, dbService: SanterDatabase) =
-            INSTANCE ?: synchronized(this) {
-                INSTANCE ?: Repository(apiService, dbService).apply { INSTANCE = this }
-            }
-    }
-
     private val userDao get() = dbService.getUserDao()
 
     fun login(username: String, password: String) = FlowUtils.defaultFlowCallback {

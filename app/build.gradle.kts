@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.devtools.ksp)
+    alias(libs.plugins.hilt.dagger)
 }
 
 android {
@@ -47,6 +49,10 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(project(":core"))
     implementation(libs.androidx.swiperefreshlayout)
+
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
