@@ -1,10 +1,10 @@
-package com.rudyrachman16.samarindasanter.ui.dashboard
+package com.rudyrachman16.samarindasanter.ui.dashboard.screen
 
 import android.webkit.WebView
-import android.webkit.WebViewClient
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -12,31 +12,31 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
-import com.bumptech.glide.integration.compose.placeholder
+import coil.compose.AsyncImage
 import com.example.ui.theme.SamarindaSanterTypography
+import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import com.rudyrachman16.samarindasanter.R
 import com.rudyrachman16.samarindasanter.core.BuildConfig
 import com.rudyrachman16.samarindasanter.core.model.News
 import com.rudyrachman16.samarindasanter.utils.ImageViewUtils
 
-@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun DetailScreen(news: News) {
-    LazyColumn(contentPadding = PaddingValues(bottom = 12.dp), modifier = Modifier.fillMaxWidth()) {
+    LazyColumn(modifier = Modifier.fillMaxWidth()) {
         item {
-            GlideImage(
+            AsyncImage(
                 model = "${BuildConfig.IMAGE_URL}/${news.foto}",
                 contentDescription = news.preview,
-                contentScale = ContentScale.FillWidth,
-                failure = placeholder(R.drawable.ic_broken_image),
-                loading = placeholder(ImageViewUtils.loadingDrawable(LocalContext.current)),
+                contentScale = ContentScale.Crop,
+                error = painterResource(R.drawable.ic_broken_image),
+                placeholder = rememberDrawablePainter(ImageViewUtils.loadingDrawable(LocalContext.current)),
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(PaddingValues(bottom = 12.dp))
                     .height(300.dp)
             )
         }
@@ -44,7 +44,9 @@ fun DetailScreen(news: News) {
             Text(
                 text = news.judul ?: "",
                 style = SamarindaSanterTypography.headlineMedium,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(PaddingValues(bottom = 12.dp, start = 20.dp, end = 20.dp))
             )
         }
         item {
@@ -52,22 +54,32 @@ fun DetailScreen(news: News) {
                 text = news.createdAt ?: "",
                 style = SamarindaSanterTypography.labelSmall,
                 color = Color.LightGray,
-                textAlign = TextAlign.End
+                textAlign = TextAlign.End,
+                modifier = Modifier.padding(
+                    PaddingValues(
+                        bottom = 12.dp,
+                        start = 20.dp,
+                        end = 20.dp
+                    )
+                )
             )
         }
         item {
-            AndroidView(factory = {
-                WebView(it).apply {
-                    settings.javaScriptEnabled = true
-                    webViewClient = WebViewClient()
-
-                    settings.loadWithOverviewMode = true
-                    settings.useWideViewPort = true
-                    settings.setSupportZoom(true)
-                }
-            }, update = {
-                it.loadData(news.isi ?: "", "text/html", "UTF-8")
-            })
+            AndroidView(
+                factory = {
+                    WebView(it)
+                },
+                update = {
+                    it.loadData(news.isi ?: "", "text/html", "UTF-8")
+                },
+                modifier = Modifier.padding(
+                    PaddingValues(
+                        bottom = 12.dp,
+                        start = 20.dp,
+                        end = 20.dp
+                    )
+                )
+            )
         }
     }
 }

@@ -33,7 +33,7 @@ import com.rudyrachman16.samarindasanter.utils.ViewUtils.showToast
 import com.rudyrachman16.samarindasanter.utils.ViewUtils.viewModelStatusConsume
 
 @Composable
-fun LoginCompose(viewModel: LoginViewModel = viewModel()) {
+fun LoginScreen(viewModel: LoginViewModel = viewModel()) {
     val usernameFocus = remember { FocusRequester() }
     val passwordFocus = remember { FocusRequester() }
 

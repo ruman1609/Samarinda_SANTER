@@ -12,6 +12,8 @@ import com.example.compose.SamarindaSanterTheme
 import com.rudyrachman16.samarindasanter.core.model.News
 import com.rudyrachman16.samarindasanter.ui.dashboard.route.AssertNewsParcelable
 import com.rudyrachman16.samarindasanter.ui.dashboard.route.DashboardRoute
+import com.rudyrachman16.samarindasanter.ui.dashboard.screen.DashboardScreen
+import com.rudyrachman16.samarindasanter.ui.dashboard.screen.DetailScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

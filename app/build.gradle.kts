@@ -56,9 +56,11 @@ dependencies {
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
+    implementation(libs.hilt.composenav)
 
     implementation(libs.androidx.lifecycle.livedata.ktx)  // asLiveData
-    implementation(libs.glide)  // glide
+    implementation(libs.coil)  // coil image from url
+    implementation(libs.drawablePainter)
 
     // region compose
     val composePlatform = platform(libs.compose.bom)
