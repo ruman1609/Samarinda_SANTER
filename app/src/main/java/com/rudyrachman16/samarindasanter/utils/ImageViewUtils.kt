@@ -29,7 +29,7 @@ object ImageViewUtils {
      * @param context an Activity Context
      * @return animated circular for loading indicator
      */
-    private fun loadingDrawable(context: Context) = CircularProgressDrawable(context).apply {
+    fun loadingDrawable(context: Context) = CircularProgressDrawable(context).apply {
         strokeWidth = 5f
         centerRadius = 20f
         start()

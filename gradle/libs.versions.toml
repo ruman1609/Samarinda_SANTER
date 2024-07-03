@@ -1,7 +1,7 @@
 [versions]
 agp = "8.5.0"
 converterGson = "2.9.0"
-glide = "4.16.0"
+glideCompose = "1.0.0-beta01"
 gson = "2.10.1"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
@@ -9,7 +9,7 @@ junit = "4.14-SNAPSHOT"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
-lifecycleLivedataKtx = "2.8.2"
+lifecycleLivedataKtx = "2.8.3"
 loggingInterceptor = "5.0.0-alpha.11"
 material = "1.12.0"
 activity = "1.9.0"
@@ -20,6 +20,9 @@ roomRuntime = "2.6.1"
 swiperefreshlayout = "1.1.0"
 ksp = "1.9.20-1.0.14"
 hilt = "2.48"
+composeBom = "2024.06.00"
+composeActivity = "1.9.0"
+composeNav = "2.7.7"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -27,7 +30,7 @@ androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-lived
 androidx-room-ktx = { module = "androidx.room:room-ktx" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
-glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+glide = { module = "com.github.bumptech.glide:compose", version.ref = "glideCompose" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -42,6 +45,15 @@ room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCom
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+compose_bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
+compose_material3 = { module = "androidx.compose.material3:material3" }
+compose_preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+compose_preview_test = { module = "androidx.compose.ui:ui-tooling" }
+compose_materialicon = { module = "androidx.compose.material:material-icons-extended" }
+compose_activity = { module = "androidx.activity:activity-compose", version.ref = "composeActivity" }
+compose_viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleLivedataKtx" }
+compose_livedata = { module = "androidx.compose.runtime:runtime-livedata" }
+compose_nav = { module = "androidx.navigation:navigation-compose", version.ref = "composeNav" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

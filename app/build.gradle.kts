@@ -38,6 +38,10 @@ android {
     buildFeatures {
         viewBinding = true
         buildConfig = true
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.2"
     }
 }
 
@@ -53,10 +57,25 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
 
+    implementation(libs.androidx.lifecycle.livedata.ktx)  // asLiveData
+    implementation(libs.glide)  // glide
+
+    // region compose
+    val composePlatform = platform(libs.compose.bom)
+    implementation(composePlatform)
+    implementation(libs.compose.material3)
+    implementation(libs.compose.preview)
+    implementation(libs.compose.materialicon)
+    implementation(libs.compose.activity)
+    implementation(libs.compose.viewmodel)
+    implementation(libs.compose.livedata)
+    implementation(libs.compose.nav)
+    // endregion compose
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation(libs.androidx.lifecycle.livedata.ktx)  // asLiveData
-    implementation(libs.glide)  // glide
+    androidTestImplementation(composePlatform)  // Compose BOM Test
+    debugImplementation(libs.compose.preview.test)  // Compose Preview Support Test
 }

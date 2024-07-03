@@ -37,7 +37,6 @@ android {
         consumerProguardFiles("consumer-rules.pro")
 
         buildConfigField("String", "TOKEN", "${getLocalProperty("token")}")
-        buildConfigField("String", "KEY", "${getLocalProperty("key")}")
         buildConfigField("String", "BASE_URL", "${getLocalProperty("base_url")}")
         buildConfigField("String", "IMAGE_URL", "${getLocalProperty("image_url")}")
     }
@@ -70,7 +69,7 @@ dependencies {
     ksp(libs.room.compiler)
     implementation(libs.androidx.room.ktx)
 
-    implementation(libs.gson) // GSON
+    api(libs.gson) // GSON
     implementation(libs.retrofit) // Retrofit
     implementation(libs.converter.gson)  // Retrofit GSON Converter
     implementation(libs.logging.interceptor)  // buat Log Retrofit
